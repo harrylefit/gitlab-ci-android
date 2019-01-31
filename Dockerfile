@@ -28,6 +28,8 @@ RUN apt-get -qq update && \
       lib32z1 \
       unzip \
       locales \
+      ruby2.4 \
+      ruby2.4-dev \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 RUN locale-gen en_US.UTF-8
 ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en' LC_ALL='en_US.UTF-8'
@@ -52,3 +54,5 @@ RUN while read -r package; do PACKAGES="${PACKAGES}${package} "; done < /sdk/pac
     ${ANDROID_HOME}/tools/bin/sdkmanager ${PACKAGES}
 
 RUN yes | ${ANDROID_HOME}/tools/bin/sdkmanager --licenses
+
+RUN gem install fastlane
