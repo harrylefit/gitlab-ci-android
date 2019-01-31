@@ -6,7 +6,7 @@
 #
 
 FROM ubuntu:18.04
-MAINTAINER Jan Grewe <jan@faked.org>
+LABEL maintainer="Harry Le <longle@teqnological.asia>"
 
 ENV VERSION_SDK_TOOLS "4333796"
 
@@ -14,6 +14,7 @@ ENV ANDROID_HOME "/sdk"
 ENV PATH "$PATH:${ANDROID_HOME}/tools"
 ENV DEBIAN_FRONTEND noninteractive
 
+# RUN apt-add-repository ppa:brightbox/ruby-ng
 RUN apt-get -qq update && \
     apt-get install -qqy --no-install-recommends \
       bzip2 \
@@ -21,15 +22,17 @@ RUN apt-get -qq update && \
       git-core \
       html2text \
       openjdk-8-jdk \
+      zip \
+      git \
+      build-essential \
       libc6-i386 \
       lib32stdc++6 \
       lib32gcc1 \
       lib32ncurses5 \
       lib32z1 \
+      ruby-full \
       unzip \
       locales \
-      ruby2.4 \
-      ruby2.4-dev \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 RUN locale-gen en_US.UTF-8
 ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en' LC_ALL='en_US.UTF-8'
